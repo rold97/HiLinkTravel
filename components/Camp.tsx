@@ -1,5 +1,8 @@
+"use client";
 import { PEOPLE_URL } from "@/constants";
 import Image from "next/image";
+import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
+import { useRef } from "react";
 
 interface CampProps {
   backgroundImage: string;
@@ -49,10 +52,35 @@ const CampSite = ({
   );
 };
 
+const sliderRight = () => {
+  const slider = document.getElementById("slider")!;
+  slider.scrollLeft = slider.scrollLeft + 700;
+};
+
+const sliderLeft = () => {
+  const slider = document.getElementById("slider")!;
+  slider.scrollLeft = slider.scrollLeft - 700;
+};
+
 const Camp = () => {
   return (
     <section className="2xl:max-container relative flex flex-col py-10 lg:py-20 xl:mb-20">
-      <div className="no-scrollbar flex h-[340px] w-full items-start justify-start gap-8 overflow-x-auto lg:h-[480px] xl:h-[640px]">
+      <div
+        className="no-scrollbar scroll-smooth flex h-[340px] w-full items-start justify-start gap-8 overflow-x-auto lg:h-[480px] xl:h-[640px]"
+        id="slider"
+      >
+        <div
+          className="bg-green-50 rounded-full text-white opacity-70 p-4 absolute top-[320px] left-[-30px] hover:shadow-[4px_-2px_15px_0px_rgba(0,0,0,0.4)] cursor-pointer transition-all duration-300 hover:opacity-100 hidden lg:block"
+          onClick={sliderLeft}
+        >
+          <BsChevronCompactLeft size={35} />
+        </div>
+        <div
+          className="bg-green-50 rounded-full text-white opacity-70 p-4 absolute top-[320px] right-[-30px] hover:shadow-[4px_-2px_15px_0px_rgba(0,0,0,0.4)] cursor-pointer transition-all duration-300 hover:opacity-100 hidden lg:block"
+          onClick={sliderRight}
+        >
+          <BsChevronCompactRight size={35} />
+        </div>
         <CampSite
           backgroundImage="bg-bg-img-1"
           title="Putuk Truno Camp"
@@ -65,7 +93,14 @@ const Camp = () => {
           subtitle="Somewhere in the Wilderness"
           peopleJoined="50+ Joined"
         />
+        <CampSite
+          backgroundImage="bg-bg-img-3"
+          title="Putuk Truno Camp"
+          subtitle="Prigen Pasuruan"
+          peopleJoined="50+ Joined"
+        />
       </div>
+
       <div className="flexEnd mt-10 px-6 lg:-mt-60 lg:mr-6">
         <div className="bg-green-50 p-10 lg:max-w-[500px] xl:max-w-[734px] xl:rounded-5xl xl:px-16 xl:py-20 relative w-full overflow-hidden rounded-3xl">
           <h2 className="regular-24 md:regular-32 2xl:regular-64 capitalize text-white">
